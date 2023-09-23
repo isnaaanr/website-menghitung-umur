@@ -25,9 +25,32 @@ function validasiForm(){
     } else {
         peringatanView.style = "display:none;"
     }
+
+    //if : ini adalah sebuah logika ketika user menginput sebuah angka (inputUltahValue) lebih dari tahunsaat ini secara (real time) dan mengubah konten dari peringatan view menjadi tahun kelahiran tidak boleh melebihi tahun sekarang 
+    if (inputUltahValue > tahunSekarang) {
+        hasilView.style = "display:none;"
+        peringatanView.style = "display:block; color:red; width:200px;" 
+        peringatanView.innerHTML= "tahun kelahiran anda tidak boleh melebihi tahun sekarang;"
+    }
+
+    //ini adalah logika untuk user ketika menginput setiap hasil umur anda sekarang adalah ditambah dengan konten teks tambahan (innerHTML +=) berupa golongan 
+
+    if(hasil <= 3 && hasil >= 1 ){
+        hasilView.innerHTML += " anda balita"; 
+    } else if(hasil <= 11 && hasil >= 3){
+        hasilView.innerHTML += " anda anak-anak";
+    } else if(hasil <= 20 && hasil >= 12){
+        hasilView.innerHTML += " anda remaja";
+    } else if (hasil <=59  && hasil >= 21){
+        hasilView.innerHTML += " anda dewasa";
+    } else if (hasil <= 100 && hasil >= 60){
+        hasilView.innerHTML += " anda lansia";
+    } else {
+        hasilView.innerHTML += " anda bayi";
+    }
 }
 //validasi onkeydown didalam input ketika user meng enter lalu memanggil logic yang ada di validasiForm didalam onclick tag button
-function saatDiEnter(event){
+function saatDiEnter(event) {
     if (event.key === "Enter") {
         validasiForm()
     }
@@ -35,7 +58,7 @@ function saatDiEnter(event){
 
 //syntax ini mengambil nilai dari input ultah, divalidasi menjadi user hanya memberikan value hanya 4 angka 
 function maksimumInput(){
-    const inputUltah = document.getElementById("inputUltah")
+    const inputUltah = document.getElementById("inputUltah");
     const inputUltahValue = inputUltah.value
 
     inputUltah.value = inputUltahValue.slice(0,4)
